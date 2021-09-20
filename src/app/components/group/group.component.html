@@ -1,0 +1,37 @@
+<div style="display: inline-block;">
+    <div class="sidebar" style="float: left;">
+        <h1 class="title has-text-primary">Groups</h1>
+        <button class="btn btn-primary btn-rounded-corners" routerLink="/newGroup">Add Group</button>
+        <div class="group-menu">
+            <a class="group-menu-item" *ngFor="let group of groups" [routerLink]="['/groups', group._id]" routerLinkActive="is-active">
+                <p class="white-text">
+                    {{ group.name }}
+                    <span class="pull-right message-delete btn-rounded-corners" (click)="deleteGroup(group)">X</span>
+                </p>
+            </a>
+        </div>
+    </div>
+    
+    <div class="centered-content" style="float: left;">
+        <div class="main-container">
+    
+            <div class="group-message-container">
+              <h1 class="title has-text-primary">Message</h1>
+              <div id="list-messages">
+                <div class="message" *ngFor="let message of messages" (click)="onMessageClick(message)">
+                    <div class="white-text">
+                        <div [innerHTML]="message.messageText | stripTags | slice:0:20"></div>
+                        <!-- <div>{{message.messageText | sanitizeHtml}}</div> -->
+                       <div class="pull-right"> 
+                            <span class="message-edit btn-rounded-corners" (click)="editMessage(message)">edit</span>
+                            <span class="message-edit btn-rounded-corners" (click)="viewMessageClick(message)">View</span>
+                            <span class="message-delete btn-rounded-corners" (click)="deleteMessage(message)">X</span>
+                        </div>
+                    </div>
+                </div>  
+              </div>
+              <button class="btn-primary add-button" (click)="addMessageClick()">Add Message</button>
+          </div>
+        </div>
+      </div>    
+</div>

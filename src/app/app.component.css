@@ -1,0 +1,36 @@
+#sidenav{
+    width: 200px;left: 200;
+
+    background-color:  rgb(156, 213, 247);
+}
+#page-content{
+    top: 100;
+    width: calc(100% - 200px);
+    float: left;
+}
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: grey;
+}
+#container{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: grey;
+}
+/* .footer{
+    width: 101%;
+    position: relative;
+    bottom: 0;
+    background-color: #343a40;
+} */
+.mgTop {
+    margin-top: 6%;
+}
+
+
+
+
+

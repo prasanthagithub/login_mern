@@ -1,0 +1,7 @@
+<div *ngIf="messageId" class="centered-content">
+    <div class="modal-box form-group">
+        <button class="btn btn-primary" (click)="backButton()">Back</button>
+        <h1 class="title">Message View</h1>
+        <div [innerHTML]="messageText | sanitizeHtml"></div>
+    </div>
+</div>

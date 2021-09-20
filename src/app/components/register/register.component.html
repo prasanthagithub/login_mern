@@ -1,0 +1,120 @@
+
+
+<div class="container">
+  <div class="form">
+    <div class="sign-in-section">
+      <h1>Register</h1>
+      <div class="">
+        <!-- <div class="col-2">
+          <img class="camera" data-toggle="modal" data-target="#uploadModal" src="./assets/images/camera.svg" />
+          <img class="profile_pic" [src]="'assets/images/default-profile-pic.jpg'" />
+        </div> -->
+        <div class="wrapper">
+          <input type="file" data-target="#uploadModal" data-toggle="modal" class="my-file" />
+        </div>
+        <div class="">
+          <form [formGroup]="registerForm">
+            <div class="form-field" [ngClass]="{'has-danger':name.invalid && (name.dirty || name.touched),
+            'has-success':name.valid && (name.dirty || name.touched)}">
+              <label for="name">Name</label>
+              <input id="name" type="text" placeholder="Name" [formControl]="name" />
+              <small class="text-danger" *ngIf=" submitted && name.hasError('required')">Name is required</small>
+              <small class="text-danger" *ngIf="  name.hasError('pattern')">Name must not be numeric or Special chracter</small>
+            </div>
+        <div class="form-field" [ngClass]="{'has-danger':username.invalid && (username.dirty || username.touched),
+        'has-success':username.valid && (username.dirty || username.touched)}">
+          <label for="name">Username</label>
+          <input id="name" type="text" placeholder="UserName" [formControl]="username" />
+          <small class="text-danger" *ngIf=" submitted && username.hasError('required')">Username is required</small>
+        </div>
+            <div class="form-field" [ngClass]="{'has-danger':email.invalid && (email.dirty || email.touched),
+            'has-success':email.valid && (email.dirty || email.touched)}">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="Email" [formControl]="email" />
+              <small class="text-danger" *ngIf=" email.hasError('pattern')">email Invalid</small>
+              <small class="text-danger" *ngIf="submitted && email.hasError('required')">email requird</small>
+            </div>
+            <div class="form-field" [ngClass]="{'has-danger':password.invalid && (password.dirty || password.touched),
+            'has-success':password.valid && (password.dirty || password.touched)}">
+              <label for="password">Password</label>
+              <input id="password" type="password" placeholder="Password" [formControl]="password" />
+              <small class="text-danger" *ngIf="submitted && password.hasError('requird')">Password is required</small>
+            </div>
+            <div class="form-field" [ngClass]="{'has-danger':phone.invalid && (phone.dirty || phone.touched),
+            'has-success':phone.valid && (phone.dirty || phone.touched)}">
+              <label for="phone">Phone</label>
+              <input id="phone" type="tel" placeholder="Phone" [formControl]="phone" />
+              <small class="text-danger" *ngIf="submitted && phone.hasError('required')">Phone is reuqired</small>
+              <small class="text-danger" *ngIf=" phone.hasError('pattern')">Invalid Phone number</small>
+              <small class="text-danger" *ngIf=" phone.hasError('minlength')">Minimun should be 6</small>
+              <small class="text-danger" *ngIf="phone.hasError('maxlength')">Maximum number should be 10</small>
+            </div>
+            <div class="form-field" id="gender" [ngClass]="{'has-danger':gender.invalid && (gender.dirty || gender.touched),
+            'has-success':gender.valid && (gender.dirty || gender.touched)}">
+              <label for="gender">Gender</label>
+              <input type="radio" checked id="male" name="gender" value="male" [formControl]="gender">
+              <label for="male">Male</label><br>
+              <input type="radio" id="female" name="gender" value="female" [formControl]="gender">
+              <label for="female">Female</label><br>
+              <input type="radio" id="other" name="gender" value="other"[formControl]="gender">
+              <label for="other">Other</label>
+              <!-- <small class="text-danger" *ngIf="gender.hasError('required')">Gender is required</small> -->
+            </div>
+            <div class="form-field">
+              <input type="button" class="btn btn-signin" value="Submit" [disabled]="registerForm.invalid" (click)="onRegisterSubmit()" />
+            </div>
+          </form>
+          <div class="links curPointer">
+            <span> Already have an account? <a (click)="login()">Log In</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg modelFix" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="card-title">Upload Profile Picture</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="col-12">
+                  <label>Upload your Profie Picture here.</label>
+              </div>
+              <div class="mainUpload" *ngIf="!fileToUpload.length">
+                  <div class="col-12">
+                      <span>Drop files to upload or</span><br>
+                      <a class="browseFile" (click)="upFile.click()">Browse</a>
+                      <input #upFile type="file" hidden [(ngModel)]="profilePicToBeUploaded"
+                          (change)="uploadFile($event.target.files, $event)" accept=".png, .jpeg, .jpg">
+                  </div>
+              </div>
+              <div *ngIf="fileToUpload.length">
+                  <div class="col-12 progress-panel" *ngFor="let data of fileToUpload; let i = index;">
+                      <img [src]="'assets/images/avatar-img.jpg'" class="icon-csv" />
+                      <span [ngClass]="getTextLen(data.name) ? 'fixTextLen' : ''" class="dataName"
+                          style="margin-left: 35px;">{{ data.name }}</span>
+                      <button type="button" class="close" (click)="removeFile()">
+                          <span aria-hidden="true" style="font-size: 1.5rem;">&times;</span>
+                      </button>
+                      <div class="progress" *ngIf="progress">
+                          <div class="progress-bar" role="progressbar" attr.aria-valuenow="{{ progress }}"
+                              aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: progress + '%' }">
+                          </div>
+                      </div>
+                      <span *ngIf="progress" class="progressbar-status">{{ progress }}% Done</span>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer" *ngIf="fileToUpload.length">
+              <a class="btn Calendar-btn" >SUBMIT</a>
+              <a (click)="closed()" class="btn Calendar-btn cancel">CANCEL</a>
+          </div>
+      </div>
+  </div>
+</div>

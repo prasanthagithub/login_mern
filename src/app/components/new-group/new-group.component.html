@@ -1,0 +1,12 @@
+<div class="centered-content">
+    <div class="modal-box form-group">
+        <h1 class="title">Create a new Group</h1>
+        <input #groupName type="text" class="form-control has-background-light" placeholder="Enter Group Name"/>
+        <input #groupDescription type="text" class="form-control has-background-light" placeholder="Enter Group Description"/>
+        <div class="cancel_add">
+        <button class="btn white-text" routerLink="/">Cancel</button>
+        <button class="btn btn-primary" (click)="addGroup(groupName.value, groupDescription.value)">Add</button>
+        </div>
+    </div>
+</div>
+              

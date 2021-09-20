@@ -1,0 +1,23 @@
+<div *ngIf="!messageId" class="centered-content">
+    <div class="modal-box form-group">
+        <h1 class="title">New Message</h1>
+        <angular-editor [placeholder]="'Send Message'" [(ngModel)]="messageText"></angular-editor>
+        <input #messageImage type="text" class="form-control has-background-light" placeholder="Enter Image"/>
+        <div class="cancel_add">
+        <button class="btn white-text" routerLink="../">Cancel</button>
+        <button class="btn btn-primary" (click)="addMessage(messageImage.value)">Add</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="messageId" class="centered-content">
+    <div class="modal-box form-group">
+        <h1 class="title">Edit Message</h1>
+        <input #editMessageImage type="text" class="form-control has-background-light" value="{{messageImage}}"/>
+        <angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="messageText"></angular-editor>
+        <div class="cancel_add">
+        <button class="btn white-text" routerLink="../../">Cancel</button>
+        <button class="btn btn-primary" (click)="updateMessage(editMessageImage.value)">Update</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+
+
+<div class="container">
+  <div class="form">
+    <div class="sign-in-section">
+      <h1>Log in</h1>
+      <form>
+        <div class="form-field">
+          <label for="username">Username</label>
+          <input id="username" type="username" [(ngModel)]="username" placeholder="Username"  name="username" required/>
+        </div>
+        <div class="form-field">
+          <label for="password">Password</label>
+          <input id="password" type="password" [(ngModel)]="password" placeholder="Password" name="password" required/>
+        </div>
+        <div class="form-field">
+          <input type="button" class="btn btn-signin" value="Login"  (click)="onLoginSubmit()" />
+        </div>
+      </form>
+      <div class="links curPointer">
+        <span> New here? <a (click)="register()">Create Account</a></span>
+      </div>
+    </div>
+  </div>
+</div>
